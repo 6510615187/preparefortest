@@ -35,4 +35,15 @@ finish install ---------------------------------------------------
 
 some more nat setups:
 
-back to virtualbox -> tools -> network manager
+back to virtualbox -> tools -> network manager -> nat networks
+
+set adapters on 2 vms (turn off them correctly)
+
+comment on first line of etc/apt/sources.list
+
+add this to last line of /etc/network/interfaces: 
+#The primary network interface
+allow-hotplug enp0s8
+iface enp0s8 inet dhcp
+
+if sudo not found do : apt install sudo (or do su -i and then apt update before)
