@@ -1,0 +1,38 @@
+installation steps---------------------------------------
+
+debian - https://mirror1.ku.ac.th/debian-cd/12.10.0/amd64/iso-dvd/
+
+new using iso
+
+skip unattended installation
+
+50 gb storage
+
+hostname : cn351
+
+domain name : localdomain
+
+new userandpass : cn351, cn351
+
+use entire disk
+all in one partition
+finish
+write change to disk? : yes
+
+use network mirror? : yes -> Thailand -> deb.debian.org
+
+scan extra? : no
+
+http proxy information : (blank)
+
+participated? : yes
+
+select only ssh and standard (last 2)
+
+grub? : yes -> /dev/sda
+
+finish install ---------------------------------------------------
+
+some more nat setups:
+
+back to virtualbox -> tools -> network manager
