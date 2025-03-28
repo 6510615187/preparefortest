@@ -21,13 +21,7 @@
 **Answer:** ❌ **False**  
 > Client-side data can be manipulated.
 
-(Let me continue extracting and cleaning the rest — there’s more content in the file.)
-
-Here’s the continuation of the **questions and answers** from the scanned midterm file:
-
 ---
-
-### **Part 1: True or False (continued)**
 
 **1.6** The server can always trust HTTP headers such as the User-Agent to correctly identify the browser.  
 **Answer:** ❌ **False**
