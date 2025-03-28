@@ -21,13 +21,11 @@
 **Answer:** ❌ **False**  
 > Client-side data can be manipulated.
 
----
-
 **1.6** The server can always trust HTTP headers such as the User-Agent to correctly identify the browser.  
 **Answer:** ❌ **False**
 
 **1.7** One reason for input validation on the client side is to avoid tracking data in sessions.  
-**Answer:** ❌ **False**
+**Answer:** ✅ **True**
 
 **1.8** One way for an HTTP client to pass data to an HTTP server is via URL parameters.  
 **Answer:** ✅ **True**
@@ -38,49 +36,63 @@
 **1.10** User credentials can be safely transmitted using the GET method.  
 **Answer:** ❌ **False**
 
----
-
 ### **Part 2: Short Answer Questions**
 
-**2.1** _Explain what authentication and authorization are._
+**2.1** _Why is it a bad idea to include detailed error information (e.g. including a stack trace) in the HTTP response when the server throws an exception._
+
+**Answer:**  
+- That will make attackers, another users knows about files and folders in the machine and know where mistakes is, which makes it unsafe.
+
+
+**2.2** _Explain what authentication and authorization are._
 
 **Answer:**  
 - **Authentication** is the process of verifying the identity of a user.  
-- **Authorization** is the process of checking what permissions an authenticated user has.
+- **Authorization** is the process of checking requiring resource user have access to using the system or not
+- - Normally wiil occurs authentication then authorization
 
----
 
-**2.2** _List ways that an HTTP client can pass data to an HTTP server._
+**2.3** _List ways that an HTTP client can pass data to an HTTP server._
 
 **Answer:**
-- URL query parameters (`?key=value`)
+- URL query parameters/query string (`?key=value`)
 - HTML form submission via `GET` or `POST`
-- Request body (used in APIs or AJAX)
-- Custom HTTP headers
-- Cookies
+- JSON/XML payload transfer data through body in JSON/XML form
+- Cookies keep data in client side cookies and send to server along with sending request
+- - HTTP headers send data through HTTP header along with sending request
 
----
 
-**2.3** _List at least 3 methods that can be used for authentication._
+**2.4** _List at least 3 methods that can be used for authentication._
 
 **Answer:**
-- Username/password (form-based authentication)
-- Multi-factor authentication (e.g. SMS code, authenticator app)
+- HTML form-based authentication : Using GET/POST method
+- Multi-factor authentication
 - Client-side SSL certificates
-- Smart cards
 - OAuth tokens or API keys
 
----
+**2.5** _List at least 3 design flaws in password-based authentication._
 
-Let me continue to extract and clean the rest — looks like there are a few more pages left.
+**Answer:**
+- Password reuse across sites
+- Weak or guessable passwords
+- Passwords stored without hashing (plaintext storage)
+- Poor password recovery mechanisms
+- No rate limiting or brute force protection
+- No 2FA/multi-factor authentication
 
-Here’s the remaining content from the exam, cleaned and organized for you:
+**2.6** _When you type a URL into the address bar of a browser and press enter, describe all request/response steps between client and server until the browser gets the final response._
 
----
+**Answer:**
+Client                        Server
+------                        ------
+HTTP Client send connection to HTTP server        -->      
+<-- HTTP server as host accepts connection, notifying client 
+
+
 
 ### **Part 3: Practical Tasks / Scenario-Based (using Kali + Burp Suite)**
 
-**3.1** Setup a NAT Network in VirtualBox:  
+**3** Setup a NAT Network in VirtualBox:  
 - Use `10.0.1.0/24` for the NAT network.  
 - Set both Kali desktop and target VM to the same network.  
 - Run both VMs.  
@@ -89,6 +101,11 @@ Here’s the remaining content from the exam, cleaned and organized for you:
 > These are setup instructions — no written answer needed unless screenshots are required.
 
 ---
+
+**3.1** Determine the IPv4 address of your kali-desktop. List any step you use.
+**Answer:**  
+> Use the command: `ip addr` or `ip a`  
+> Look under the correct interface (e.g., `eth0` or `enp0s3`)
 
 **3.2** Determine the IPv4 address of the target server.  
 **Answer:**  
@@ -100,17 +117,16 @@ Here’s the remaining content from the exam, cleaned and organized for you:
 **3.3** Determine the open ports on the target server.  
 **Answer:**  
 > Use `nmap <target-ip>`  
-> Example command: `nmap -p- 10.0.1.X`  
-> This will show open ports like 80, 8080, 3000, etc.
+> Example command: `nmap 10.0.3.5 -p- 0-65535`  
 
 ---
 
 **3.4** For all the ports found in 3.3, list any port number used for HTTP.  
 **Answer (Example):**  
 - Port 80  
-- Port 8080  
-- Port 3000  
-*(This depends on what was open in your specific test environment)*
+- Port 1503
+- Port 2567
+- Port 6703
 
 ---
 
@@ -162,5 +178,12 @@ List all **headers in the response**.
 - X-Content-Type-Options: nosniff  
 - Content-Length: <value>  
 - Server: Apache/Nginx/etc.
+
+- **3.10** Identify a flaw in the application at /login or /items.
+List an attack you could use, and describe how to prevent it.**.  
+**Answer:**  
+- Flaw: No session validation / weak cookie
+- Attack: Session fixation or cookie tampering (e.g. manually set username=admin)
+- Fix: Use secure session tokens, verify session on server, enable HttpOnly and Secure flags on cookies
 
 ---
